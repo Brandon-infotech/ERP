@@ -11,25 +11,33 @@ const UserSchema = new mongoose.Schema(
       required: [true, "Email is required"],
       type: String,
     },
-    status: {
+    contact: {
+      required: [true, "Contact Number is required"],
       type: String,
+    },
+    role: {
+      default : 2,
+      type: Number,
+      enum:[1,2,3]
+      // 1 : admin , 2: employee ; 3 : client
+    },
+    status: {
+      type: Boolean,
+      // True is active ; False is fired
     },
     password: {
       required: [true, "password is required"],
       type: String,
-    },
-
-    role: {
-      type: String,
-      enum: ["Admin", "Guest", "Blogger"],
-      default: "Guest",
     },
     profilePhoto: {
       type: String,
       default:
         "https://cdn.pixabay.com/photo/2017/01/10/03/54/avatar-1968236_960_720.png",
     },
-    
+    position:{
+      type:String,
+      required:[true,"Posiiton is required"]
+    }
   },
   {
     
