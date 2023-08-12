@@ -1,40 +1,50 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const cors =  require("cors");
-require("dotenv").config();
+import express from "express";
+import dotenv  from 'dotenv'
+import connectDB from "./config/dbCon.js";
+import cors from 'cors'
+import authRoutes from './routes/utils/AuthRoutes.js';
+import projectRoutes from './routes/project_module/projectRoutes.js';
+import addressRoutes from './routes/address_module/addressRoutes.js';
+import bankRoutes from './routes/bank_module/bankRoutes.js';
+import payrollRoutes from './routes/payroll_module/payrollRoutes.js';
+import invoiceRoutes from './routes/invoice_module/invoiceRoutes.js';
+import attendenceRoutes from './routes/attendence_module/attendenceRoutes.js';
+import messageRoutes from './routes/chat_module/messageRoutes.js';
+import chatRoutes from './routes/chat_module/chatRoutes.js';
 
 
+//config env
+dotenv.config()
+
+// rest objects 
 const app = express();
-app.use(express.json({limit: '200mb'}));
-app.use(express.urlencoded({limit: '200mb',extended:true}));
-app.use(cors())
+
+// database config 
+connectDB();
 
 
-// const router = require("./router");
+// middleware
+app.use(express.urlencoded({extended:true}))
+app.use(express.json());
+app.use(cors());
+
+// routes
+
+app.use('/api/auth',authRoutes);
+app.use('/api/projects',projectRoutes);
+app.use('/api/address',addressRoutes);
+app.use('/api/bank',bankRoutes);
+app.use('/api/payroll',payrollRoutes);
+app.use('/api/invoice',invoiceRoutes);
+app.use('/api/attendence',attendenceRoutes);
+app.use('/api/chats',chatRoutes);
+app.use('/api/chats/messages',messageRoutes);
 
 
-// DB connection
+//PORT 
+const PORT = process.env.PORT || 3001;
 
-
-mongoose.connect(process.env.MONGODB_URL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => {
-    console.log("Connected to MongoDB");
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-
-
-
-const PORT = 3001;
-// app.use(router);
-
-
-app.listen(PORT, async () => {
-  console.log(`server up on port : ${PORT}`);
-});
-
-
+//server running 
+app.listen(PORT,()=>{
+  console.log(`Server is running at port ${PORT}`);
+})

@@ -1,4 +1,4 @@
-const jwt = require("jsonwebtoken");
+import jwt from 'jsonwebtoken'
 
 function auth(role) {
   return function (req, res, next) {
@@ -7,7 +7,8 @@ function auth(role) {
       return res.status(403).send("Access denied. No token provided.");
     }
     try {
-      const decoded = jwt.verify(token, process.env.SECRET_KEY);
+      // const decoded = jwt.verify(token, process.env.SECRET_KEY);
+      const decoded = jwt.verify(token, process.env.JWT_SECRET,{expiresIn:'5d'});
       // console.log(decoded);
       if (decoded.role !== role) {
         return res.status(403).send("Forbidden."); 
@@ -21,4 +22,4 @@ function auth(role) {
   };
 }
 
-module.exports = auth;
+export default auth;

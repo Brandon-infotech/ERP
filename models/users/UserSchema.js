@@ -1,23 +1,26 @@
-const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
+// const mongoose = require("mongoose");
+// const bcrypt = require("bcrypt");
+import mongoose from "mongoose";
+import bcrypt from "bcrypt"
 
 const UserSchema = new mongoose.Schema(
   {
     name: {
-      required: [true, "Name is required"],
       type: String,
+      required: [true, "Name is required"],
     },
     email: {
       required: [true, "Email is required"],
       type: String,
     },
-    contact: {
-      required: [true, "Contact Number is required"],
+    phone: {
+      required: [true, "Contact Number is required "],
       type: String,
+      minLenght:10,
     },
     role: {
-      default : 2,
       type: Number,
+      default : 2,
       enum:[1,2,3]
       // 1 : admin , 2: employee ; 3 : client
     },
@@ -37,7 +40,15 @@ const UserSchema = new mongoose.Schema(
     position:{
       type:String,
       required:[true,"Posiiton is required"]
+    },address: {
+      type: mongoose.Schema.ObjectId,
+      ref: "Address",
     }
+    ,bankDetails: {
+      type: mongoose.Schema.ObjectId,
+      ref: "Bank",
+    },
+
   },
   {
     
@@ -45,16 +56,16 @@ const UserSchema = new mongoose.Schema(
   }
 );
 
-//Hash Password
-UserSchema.pre("save", async function (next) {
-  const salt = await bcrypt.genSalt(10);
-  this.password = await bcrypt.hash(this.password, salt);
-  next();
-});
-UserSchema.methods.isPasswordMatched = async function(enteredPassword){
-  return await bcrypt.compare(enteredPassword, this.password);
-};
+//Hash Password 
+// UserSchema.pre("save", async function (next) {
+//   const salt = await bcrypt.genSalt(10);
+//   this.password = await bcrypt.hash(this.password, salt);
+//   next();
+// });
+// UserSchema.methods.isPasswordMatched = async function(enteredPassword){
+//   return await bcrypt.compare(enteredPassword, this.password);
+// };
 
-const User = mongoose.model("User", UserSchema);
+const userModel = mongoose.model("User", UserSchema);
 
-module.exports = User;
+export default userModel;

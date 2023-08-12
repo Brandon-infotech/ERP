@@ -1,20 +1,25 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const BankSchema = new mongoose.Schema(
   {
-    bankname: {
+    bankName: {
+      required: [true, "bankname is required"],
       type: String,
     },
     branchName: {
+            required: [true, "branchName is required"],
       type: String,
     },
     holderName: {
+            required: [true, "holderName is required"],
       type: String,
     },
     ifsc: {
+            required: [true, "ifsc is required"],
       type: String,
     },
     upiId: {
+            required: [true, "upiId is required"],
       type: String,
     },
     user: {
@@ -27,4 +32,4 @@ const BankSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("Bank", BankSchema);
+export default  mongoose.model("Bank", BankSchema);
