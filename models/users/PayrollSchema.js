@@ -3,20 +3,18 @@ import mongoose from "mongoose";
 const PayrollSchema = new mongoose.Schema(
   {
     userName: {
+      type: mongoose.Schema.ObjectId,
       required: [true, "userName is required"],
-      type: String,
-    },
-    total: {
-            required: [true, "branchName is required"],
-      type: Number,
+      // type: String,
     },
     amount: {
-            required: [true, "holderName is required"],
+            required: true,
       type: Number,
     },
     status: {
             required: [true, "status is required"],
       type: String,
+      enum: ["pending", "paid"],
     },
   },
   {

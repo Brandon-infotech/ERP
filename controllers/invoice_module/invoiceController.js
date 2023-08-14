@@ -19,7 +19,7 @@ export const getAllInvoices = async (req, res) => {
 
 export const generateInvoice = async (req, res) => {
     try {
-        console.log(req.body);
+        // console.log(req.body);
         const invoices = await new  Invoice(req.body).save();
         res.status(200).json({
             success: true,

@@ -24,15 +24,15 @@ const UserSchema = new mongoose.Schema(
       enum:[1,2,3]
       // 1 : admin , 2: employee ; 3 : client
     },
-    status: {
+    status:{
       type: Boolean,
       // True is active ; False is fired
     },
-    password: {
+    password:{
       required: [true, "password is required"],
       type: String,
     },
-    profilePhoto: {
+    profilePhoto:{
       type: String,
       default:
         "https://cdn.pixabay.com/photo/2017/01/10/03/54/avatar-1968236_960_720.png",
@@ -40,11 +40,12 @@ const UserSchema = new mongoose.Schema(
     position:{
       type:String,
       required:[true,"Posiiton is required"]
-    },address: {
+    },
+    address:{
       type: mongoose.Schema.ObjectId,
       ref: "Address",
-    }
-    ,bankDetails: {
+    },
+    bankDetails: {
       type: mongoose.Schema.ObjectId,
       ref: "Bank",
     },

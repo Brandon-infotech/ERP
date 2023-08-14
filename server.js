@@ -11,6 +11,7 @@ import invoiceRoutes from './routes/invoice_module/invoiceRoutes.js';
 import attendenceRoutes from './routes/attendence_module/attendenceRoutes.js';
 import messageRoutes from './routes/chat_module/messageRoutes.js';
 import chatRoutes from './routes/chat_module/chatRoutes.js';
+import timesheetRoutes from './routes/timesheet_module/timesheetRoutes.js';
 
 
 //config env
@@ -39,6 +40,8 @@ app.use('/api/invoice',invoiceRoutes);
 app.use('/api/attendence',attendenceRoutes);
 app.use('/api/chats',chatRoutes);
 app.use('/api/chats/messages',messageRoutes);
+app.use('/api/timesheet',timesheetRoutes);
+
 
 
 //PORT 

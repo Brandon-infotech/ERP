@@ -7,10 +7,21 @@ const messageSchema = new mongoose.Schema({
     },content:{
         type: String,
     },
-    chat:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Chat"
-    }
+    status:{
+        type: String,
+        enum:['recieved','sent','deleted']
+    },
+    messageType:{
+        type:  String,
+        enum:['text','image','file','video']
+    },
+    isPinned:
+        {
+            type: Boolean,
+            default: false
+        }
+},{
+    timestamps: true
 })
 export default mongoose.model("Message", messageSchema);
 

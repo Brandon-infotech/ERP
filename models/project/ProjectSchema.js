@@ -32,6 +32,10 @@ const projectSchema = new mongoose.Schema({
       enum: ['Not Started', 'In Progress', 'Completed'],
       default: 'Not Started',
     },
+    invoice:[{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Invoice'
+    }],
   });
   
 export default  mongoose.model('Project', projectSchema);

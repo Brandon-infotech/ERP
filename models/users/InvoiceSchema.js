@@ -12,13 +12,23 @@ const invoiceSchema = new mongoose.Schema(
                     type: String,
                     required: true
                 },
-                subheading:{
+                subheading:[{
                     type: String,
                     required: true
-                }
+                }]
             }
         ],
-    },
+        amount:{
+            type: Number,
+            required: true
+        },
+        status:{
+            type: String,
+            required: true,
+            enum:['paid','unpaid','half paid']
+        },
+
+},
     {
         timestamps: true,
      }
