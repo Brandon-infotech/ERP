@@ -17,6 +17,9 @@ const BankSchema = new mongoose.Schema(
     upiId: {
       type: String,
     },
+    accNumber: {
+      type: String,
+    },
 
   },
   {

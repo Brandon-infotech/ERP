@@ -8,11 +8,11 @@ const PayrollSchema = new mongoose.Schema(
       // type: String,
     },
     amount: {
-            required: true,
+      // required: true,
       type: Number,
     },
     status: {
-            required: [true, "status is required"],
+      required: [true, "status is required"],
       type: String,
       enum: ["pending", "paid"],
     },

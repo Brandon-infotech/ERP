@@ -1,4 +1,8 @@
 import jwt from 'jsonwebtoken'
+import dotenv  from 'dotenv'
+
+
+dotenv.config()
 
 function auth(role) {
   return function (req, res, next) {
@@ -8,7 +12,7 @@ function auth(role) {
     }
     try {
       // const decoded = jwt.verify(token, process.env.SECRET_KEY);
-      const decoded = jwt.verify(token, process.env.JWT_SECRET,{expiresIn:'5d'});
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
       // console.log(decoded);
       if (decoded.role !== role) {
         return res.status(403).send("Forbidden."); 

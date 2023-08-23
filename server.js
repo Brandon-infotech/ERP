@@ -17,7 +17,7 @@ import timesheetRoutes from './routes/timesheet_module/timesheetRoutes.js';
 //config env
 dotenv.config()
 
-// rest objects 
+// rest objects
 const app = express();
 
 // database config 
@@ -27,10 +27,31 @@ connectDB();
 // middleware
 app.use(express.urlencoded({extended:true}))
 app.use(express.json());
-app.use(cors());
+// app.use(cors());
+const corsOptions ={
+  origin:['http://localhost:3000'], 
+  // credentials:true,            //access-control-allow-credentials:true
+  optionsSuccessStatus:200,
+  methods: [
+    'GET',
+    'POST',
+    'PUT',
+    'DELETE',
+  ],
+  allowedHeaders: [
+    'Content-Type',
+    'Authorization'
+  ],
 
-// routes
+}
+app.use(cors(corsOptions));
+app.options('*',cors(corsOptions))
 
+// routes.app
+// router.get('/',(req,res)=>{
+//   console.log("Hello");
+//   res.send('Hello world!');
+// })
 app.use('/api/auth',authRoutes);
 app.use('/api/projects',projectRoutes);
 app.use('/api/address',addressRoutes);

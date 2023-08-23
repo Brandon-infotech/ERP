@@ -9,16 +9,19 @@ const attendenceSchema = new mongoose.Schema({
     attendence:{
         required:true,
         type:String,
-        enum:["present","absent","half day"]
+        enum:["present","absent","half-day"],
     },
-    totalOfMonth:{
-        required:true,
-        type:Number
-    },
-    totalLeave:{  
-        required:true,
-        type:Number
+    month:{
+        type:Date,
     }
+    // totalOfMonth:{
+    //     // required:true,
+    //     type:Number
+    // },
+    // totalLeave:{  
+    //     // required:true,
+    //     type:Number
+    // }
 },{
     timestamps:true
 })

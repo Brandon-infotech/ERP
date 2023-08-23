@@ -1,13 +1,10 @@
 import userModel from "../../models/users/UserSchema.js";
 import JWT from "jsonwebtoken";
-import {
-  comparePassword,
-  hashPassword,
-} from "../../passwordAuth/passwordAuth.js";
+import {comparePassword,hashPassword,} from "../../passwordAuth/passwordAuth.js";
 
 export const userRegisterCtrl = async (req, res) => {
   try {
-    const {name,email,password,phone,address,bankDetails,profilePhoto,role,status,position,} = req.body;
+    const {name,email,password,phone,address,bankDetails,profilePhoto,role,status,position,IdPhoto} = req.body;
     const userExists = await userModel.findOne({ email });
     if (userExists) {
       return res.status(500).send({
@@ -20,7 +17,7 @@ export const userRegisterCtrl = async (req, res) => {
     const hashedPassword = await hashPassword(password);
     //save
     const user = await new userModel({
-      profilePhoto: profilePhoto,name,email,password: hashedPassword,phone,address,role,bankDetails,status,position,}).save();
+      profilePhoto: profilePhoto,name,email,password: hashedPassword,phone,address,role,bankDetails,status,position,IdPhoto}).save();
     // token
     const token = JWT.sign(
       { _id: user._id, role: user.role },
@@ -38,6 +35,7 @@ export const userRegisterCtrl = async (req, res) => {
         address: user.address,
         bankDetails: user.bankDetails,
         profilePhoto: user.profilePhoto,
+        IdPhoto: user.IdPhoto,
         role: user.role,
         status: user.status,
         position: user.position,
@@ -57,7 +55,15 @@ export const userRegisterCtrl = async (req, res) => {
 export const userLoginCtrl = async (req, res) => {
   try {
     const { email, password } = req.body;
+    // console.log(req.body);
     const user = await userModel.findOne({ email });
+    if (!user) {
+      return res.status(200).send({
+        success: false,
+        message: "Invalid email",
+      });
+    }
+    // console.log(user);
     const matchPassword = await comparePassword(password, user.password);
     if (!matchPassword) {
       return res.status(200).send({
@@ -67,18 +73,15 @@ export const userLoginCtrl = async (req, res) => {
     }
 
     // token
-    const token = JWT.sign(
-      { _id: user._id, role: user.role },
-      process.env.JWT_SECRET,
-      { expiresIn: "7d" }
-    );
-    // if (user.role !==1) {
+  const token = JWT.sign({ _id: user._id, role: user.role },process.env.JWT_SECRET,{ expiresIn: "7d" });
     return res.status(200).send({
       success: true,
       message: "Login successfully",
       token,
       name: user.name,
       role: user.role,
+      id: user.id,
+      profilePhoto:user.profilePhoto
     });
   } catch (error) {
     console.log(error);
@@ -92,10 +95,10 @@ export const userLoginCtrl = async (req, res) => {
 
 export const allUsers = async (req, res) => {
   try {
-    const user = await userModel.find().populate({path:"address",select:'line1 line2 '}).populate({path:'bankDetails',select:'bankName branchName'}) ;
+    const user = await userModel.find({role:2}).populate({path:"address",select:'line1 line2 '}).populate({path:'bankDetails',select:'bankName branchName'}) ;
     res.status(200).json({
       success: true,
-      message: "All Users ",
+      message: "All Users",
       user,
     });
   } catch (error) {
@@ -150,9 +153,10 @@ export const deleteUsers = async (req, res) => {
   }
 };
 
+
 export const getSingleUser=async (req, res) => {
   try {
-    console.log(req.params.id);
+    // console.log(req.params.id);
     const user = await userModel.findById(req.params.id);
     res.status(200).json({
       success: true,

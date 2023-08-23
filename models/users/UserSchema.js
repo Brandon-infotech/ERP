@@ -39,7 +39,8 @@ const UserSchema = new mongoose.Schema(
     },
     position:{
       type:String,
-      required:[true,"Posiiton is required"]
+      default:'Intern',
+      // required:[true,"Posiiton is required"]
     },
     address:{
       type: mongoose.Schema.ObjectId,
@@ -48,6 +49,14 @@ const UserSchema = new mongoose.Schema(
     bankDetails: {
       type: mongoose.Schema.ObjectId,
       ref: "Bank",
+    },
+    dob: {
+      type:String,
+    },
+    IdPhoto: {
+      type:String,
+      // required:[true,"Id's Photo is required"]
+
     },
 
   },
