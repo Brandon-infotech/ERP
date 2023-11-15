@@ -1,5 +1,4 @@
 import React, { useRef, useEffect } from 'react';
-import $ from 'jquery'; // Make sure you have jQuery installed as well
 import { Link } from 'react-router-dom';
 
 const Extra = (props) => {

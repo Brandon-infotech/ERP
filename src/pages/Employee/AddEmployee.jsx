@@ -33,8 +33,8 @@ const AddEmployee = () => {
   const [bankname, setBankname] = useState();
   const [accnumber, setAccnumber] = useState();
   const [branchname, setBranchname] = useState();
-  const [address, setAddress] = useState();
-  const [bank, setBank] = useState();
+  // const [address, setAddress] = useState();
+  // const [bank, setBank] = useState();
   const navigate = useNavigate()
 
 
@@ -112,7 +112,9 @@ const AddEmployee = () => {
         },{headers:{"Authorization":user.token}}
       ).then((res) =>{
         console.log(res.data);
-        setAddress(res.data.id);
+        // setAddress(res.data.id);
+        const address=res.data.address._id
+        console.log(address)
         axios.post(`${process.env.REACT_APP_BACKEND_URL}api/bank/newaccount`,
         {
           bankName:bankname,
@@ -122,9 +124,11 @@ const AddEmployee = () => {
           upiId:upi,
           accNumber:accnumber,
         },{headers:{"Authorization":user.token}}
-        ).then((res)=>{
-          console.log(res.data);
-          setBank(res.data.id);
+        ).then((res1)=>{
+          console.log(res1.data);
+          // setBank(res.data.id);
+          const bank= res1.data.account._id;
+          console.log(bank);
           axios.post(`${process.env.REACT_APP_BACKEND_URL}api/auth/register`,
           {
             name:name,
@@ -140,15 +144,15 @@ const AddEmployee = () => {
             phone:phone,
             role:role,
 
-          }).then((res)=>{
-            console.log(res.data);
+          }).then((res2)=>{
+            console.log(res2.data);
             dispatch(
               register({
-                name:res.data.name,
-                role:res.data.role,
-                token:res.data.token,
-                id:res.data.id,
-                photo:res.data.profilePhoto
+                name:res2.data.name,
+                role:res2.data.role,
+                token:res2.data.token,
+                id:res2.data.id,
+                photo:res2.data.profilePhoto
               })
             )
           })

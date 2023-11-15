@@ -50,8 +50,7 @@ const Login = () => {
   };
   return (
     <>
-      <div className="container-fluid h-100">
-        <div className="col d-flex justify-content-center align-items-center">
+      <div className="container-fluid login-bg d-flex justify-content-center align-items-center">
           <div className="col-lg-6 col-md-10 border border-4 border-black p-5 ">
               <div className="text-center">
             <h1 className="align-self-center">Login</h1>
@@ -79,7 +78,6 @@ const Login = () => {
               </div>
               <button onClick={handleData} className="btn btn-primary align-self-center">Submit</button>
           </div>
-        </div>
       </div>
     </>
   );

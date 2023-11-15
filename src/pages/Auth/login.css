@@ -1,13 +1,5 @@
-.container .row{
-    display: flex;
-    justify-content:center ;
-    align-items: center;
-}
-.container .border{
-    border: 2px solid #3F51B5 !important;
-    border-radius: 25px;
-}
-.container-fluid{
+
+.login-bg{
     height: 100vh !important;
     background-image: url(../../resources/Assets/bg-img.webp);
     background-position: center;

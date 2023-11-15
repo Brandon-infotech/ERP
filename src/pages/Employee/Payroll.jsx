@@ -2,17 +2,26 @@ import React, { useEffect, useState } from 'react'
 import Sidebar from '../../components/Sidebar';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 const Payroll = () => {
   const {user } =useSelector(state=>state); 
-  let _id = user.id;
+  const [name, setName] = useState();
+  const [phone, setPhone] = useState();
+  const [email, setEmail] = useState();
+  const [position, setPosition] = useState();
+  // let _id = user.id;
+  const {id} = useParams()
+  // const id='64e78524bfebce4adc751087';
+
+  // console.log(id);
   
   useEffect(()=>{
     const fetchUsers = async()=>{
-         await axios.get(`${process.env.REACT_APP_BACKEND_URL}api/auth/${_id}`,{headers:{"Authorization":user.token}})
+         await axios.get(`${process.env.REACT_APP_BACKEND_URL}api/auth/${id}`,{headers:{"Authorization":user.token}})
         .then((res)=>{
           // console.log(data);
-          console.log(res.data.user);
+          // console.log(res.data.user);
           setName(res.data.user.name)
           setEmail(res.data.user.email)
           setPosition(res.data.user.position)
@@ -20,11 +29,8 @@ const Payroll = () => {
         })
     }
     fetchUsers();
-},[])
-    const [name, setName] = useState();
-    const [phone, setPhone] = useState();
-    const [email, setEmail] = useState();
-    const [position, setPosition] = useState();
+    },[])
+
 
     return (
       <Sidebar>
@@ -78,7 +84,7 @@ const Payroll = () => {
               Paid
             </button>
             </div>
-          </div>
+          </div> 
           <div className="table-responsive mx-2">
             
           <table className="table table-border">

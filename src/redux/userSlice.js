@@ -34,6 +34,8 @@ export const userSlice = createSlice({
             state.name=null;
             state.role=null;
             state.token=null;
+            state.id=null;
+            state.photo=null;
             state.isAuthenticated=false;
                 state.isAdmin = false
         },
