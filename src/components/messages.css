@@ -1,0 +1,40 @@
+.loggedUser {
+  display: flex;
+  float: right !important;
+  max-width: 60% !important;
+  background-color: rgba(46, 74, 143, 0.808);
+  border-radius: 20px 0 20px 20px !important;
+}
+.name {
+  display: block;
+  position: relative;
+  left: 0;
+  /* background-color: white; */
+  color: red;
+  letter-spacing: 1px;
+  font-weight: bolder;
+}
+.attachment {
+  display: block;
+  color: blue !important;
+  letter-spacing: 1px;
+  cursor: pointer;
+  text-decoration: underline !important;
+}
+.chatImages {
+  width: 30%;
+}
+.messageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  width: fit-content;
+}
+.pinIcon {
+  display: inline-flex;
+  margin: 2px;
+}
+
+.time {
+  text-wrap: nowrap;
+}

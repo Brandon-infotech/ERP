@@ -1,0 +1,19 @@
+.circlular-select {
+  border: 1px solid black;
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+}
+.circlular-select:hover {
+  cursor: pointer;
+  height: 22px;
+  width: 22px;
+  transition: transform 0.3s ease;
+  background-color: #7269ef;
+}
+.circlular-select.selected {
+  background-color: #7269ef;
+}
+.circlular-select.selected:hover {
+  background-color: white;
+}

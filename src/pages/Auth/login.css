@@ -1,0 +1,11 @@
+
+.login-bg{
+    height: 100vh !important;
+    background-image: url(../../resources/Assets/bg-img.webp);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size:cover;
+
+}
+
+
