@@ -1,29 +1,37 @@
 import mongoose from "mongoose";
 
-const messageSchema = new mongoose.Schema({
-    sender:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User"
-    },content:{
-        type: String,
+const messageSchema = new mongoose.Schema(
+  {
+    sender: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
     },
-    status:{
-        type: String,
-        enum:['recieved','sent','deleted']
+    content: {
+      type: String,
     },
-    messageType:{
-        type:  String,
-        enum:['text','image','file','video']
+    file: {
+      type: Object,
     },
-    isPinned:
-        {
-            type: Boolean,
-            default: false
-        }
-},{
-    timestamps: true
-})
+    status: {
+      type: String,
+      enum: ["recieved", "sent", "deleted"],
+    },
+    messageType: {
+      type: String,
+      enum: ["text", "image", "file", "video"],
+    },
+    isPinned: {
+      type: Boolean,
+      default: false,
+    },
+    chat: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Chat",
+    },
+  },
+
+  {
+    timestamps: true,
+  }
+);
 export default mongoose.model("Message", messageSchema);
-
-
-
